@@ -1,0 +1,34 @@
+{
+  "name": "@kooofly/easy-code",
+  "version": "1.0.2",
+  "description": "easy-code is a tool for create files use template.",
+  "main": "bin/ecode.mjs",
+  "engines": {
+    "node": ">= 16"
+  },
+  "scripts": {},
+  "bin": {
+    "ecode": "bin/ecode.mjs"
+  },
+  "type": "module",
+  "author": "kooofly",
+  "repository": "kooofly/easy-code",
+  "license": "ISC",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "commander": "^9.4.0",
+    "directory-tree": "^3.3.0",
+    "ejs": "^3.1.8",
+    "fast-glob": "^3.2.11",
+    "fs-extra": "^10.1.0",
+    "prettier": "^2.7.1",
+    "watch": "^1.0.2"
+  },
+  "keywords": [
+    "tool",
+    "create",
+    "generate",
+    "template",
+    "watch"
+  ]
+}

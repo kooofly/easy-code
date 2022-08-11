@@ -1,0 +1,16 @@
+{
+  "name": "easy-code-example",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "h": "ecode - -k hello -d 1",
+    "a": "ecode - -k auto-router -d 1",
+    "c": "ecode - -d 1 -k command -p",
+    "cc": "ecode - -h"
+  },
+  "author": "kooofly",
+  "license": "ISC",
+  "dependencies": {
+    "ecode": "file:../"
+  }
+}
