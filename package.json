@@ -1,12 +1,14 @@
 {
   "name": "@kooofly/easy-code",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "easy-code is a tool for create files use template.",
   "main": "bin/ecode.mjs",
   "engines": {
     "node": ">= 16"
   },
-  "scripts": {},
+  "scripts": {
+    "doc": "node ./bin/ecode.mjs -c ./script/ec.config.mjs -k readme"
+  },
   "bin": {
     "ecode": "bin/ecode.mjs"
   },

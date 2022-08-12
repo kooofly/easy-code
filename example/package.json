@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "h": "ecode - -k hello -d 1",
-    "a": "ecode - -k auto-router -d 1",
-    "c": "ecode - -d 1 -k command -p",
-    "cc": "ecode - -h"
+    "h": "ecode - -k hello",
+    "a": "ecode - -k auto-router",
+    "c": "ecode - -k command -p"
   },
   "author": "kooofly",
   "license": "ISC",

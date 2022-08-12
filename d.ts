@@ -1,6 +1,8 @@
 interface Options {
+  watchDir: string
   beforeCreate: (context: Context) => Promise<BeforeCreateReturns>,
   afterCreate: (context: Context) => void
+  onFileChange?: (f, curr, prev) => void
   prettier: IPrettierOptions | boolean,
 }
 
@@ -14,7 +16,7 @@ interface Context {
     getFileContent: (filePath: string) => Promise<string>
     getFileList: (folderPath: string) =>  Promise<{ filePath: string, fileName: string, fileExtension: string }[]>
     getDirTree: (folderPath: string, onEachFile: (item: Item, path, stats) => void, onEachDirectory: (item: Item, path, stats) => void) =>  Promise<TreeObject>
-    require: (path: string) => any
+    createRequire: Function /* module.createRequire */
     getProgramOpts: () => { params?: string, key: string }
     ejs: {/* ... */}
     fastGlob: {/* ... */}
@@ -23,7 +25,6 @@ interface Context {
       warn: Function
       error: Function
     }
-    
   }
   name: string
   watchDir?: string

@@ -8,9 +8,9 @@ import {
 } from 'commander'
 import watch from 'watch'
 import * as helper from '../lib/helper.mjs'
-import { createRequire } from 'module'
 const { logMethods, importModule, getFileContent, ejs, getFileList, getDirTree } = helper
-const { require } = helper
+const { createRequire } = helper
+const require = createRequire(import.meta.url)
 const packageJson = require('../package.json')
 const program = new Command()
 
@@ -43,11 +43,6 @@ const getConfig = async (options) => {
 }
 
 const getTemplate = getFileContent
-
-// 1 input to 1 output
-// 1 input to many outputs
-// many inputs to many outputs
-// many inputs to 1 output
 
 const writeFile = (filePath, fileContent, prettierOptions) => {
 	return new Promise((resolve) => {
@@ -114,14 +109,14 @@ const execute = async () => {
 		name: key,
 		helper: {
 			...helper,
-			// 命令行参数
 			getProgramOpts() {
 				return program.opts()
 			}
 		}
 	}
 	const {
-		watchDir
+		watchDir,
+		onFileChange
 	} = cfg
 	if (!watchDir) {
 		createFiles(cfg, context)
@@ -138,7 +133,7 @@ const execute = async () => {
 			}
 		})
 		monitor.on("changed", function (f, curr, prev) {
-
+			typeof onFileChange === 'function' && onFileChange(f, curr, prev)
 		})
 		monitor.on("removed", async (f, stat) => {
 			createFiles(cfg, context)

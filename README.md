@@ -39,8 +39,7 @@ JavaScript configuration file example `ec.config.mjs`
 export default {
   hello: {
     async beforeCreate (ctx) {
-      const { require } = ctx.helper
-      const examplePackageJson = require('../package.json')
+      const { createRequire } = ctx.helper
       return [{
         templatePath: 'hello-example/template.html',
         outputPath: 'hello-example/output.html',
@@ -48,13 +47,9 @@ export default {
           message: {
             hello: 'hello',
             name: '<span>easy-code</span>'
-          },
-          version: examplePackageJson.version
+          }
         }
       }]
-    },
-    async afterCreate (ctx) {
-      ctx.helper.logMethods.info('afterCreate custom info')
     }
   }
 }
@@ -95,8 +90,10 @@ npm run useTemplateToCreateFileByFileName YourFileName
 ### Options
 ```
 interface Options {
+  watchDir: string
   beforeCreate: (context: Context) => Promise<BeforeCreateReturns>,
   afterCreate: (context: Context) => void
+  onFileChange?: (f, curr, prev) => void
   prettier: IPrettierOptions | boolean,
 }
 
@@ -110,7 +107,7 @@ interface Context {
     getFileContent: (filePath: string) => Promise<string>
     getFileList: (folderPath: string) =>  Promise<{ filePath: string, fileName: string, fileExtension: string }[]>
     getDirTree: (folderPath: string, onEachFile: (item: Item, path, stats) => void, onEachDirectory: (item: Item, path, stats) => void) =>  Promise<TreeObject>
-    require: (path: string) => any
+    createRequire: Function /* module.createRequire */
     getProgramOpts: () => { params?: string, key: string }
     ejs: {/* ... */}
     fastGlob: {/* ... */}
@@ -119,7 +116,6 @@ interface Context {
       warn: Function
       error: Function
     }
-    
   }
   name: string
   watchDir?: string
@@ -146,7 +142,7 @@ interface BeforeCreateReturn {
 
 interface IPrettierOptions {/* ... */}
 
-type TreeObject = {/* ... */}
+type TreeObject = Object
 ```
 ### Example
 
@@ -156,17 +152,18 @@ export default {
   command: {
     async beforeCreate (ctx) {
       const { name, helper } = ctx
-      const { require, getProgramOpts } = helper
+      const { createRequire, getProgramOpts, firstToUpperCase } = helper
       const programOpts = getProgramOpts()
       const { params } = programOpts
-      const pkg = require('./package.json')
+      const pkg = createRequire(import.meta.url)('./package.json')
       console.log({ name, programOpts, pkg })
       return [{
         templatePath: 'command-example/template.html',
-        outputPath: `command-example/${params}.html`,
+        outputPath: `command-example/${firstToUpperCase(params)}.html`,
         params: {
-          title: params,
-          version: pkg.version
+          name: pkg.name,
+          page: params,
+          key: name,
         }
       }]
     },
