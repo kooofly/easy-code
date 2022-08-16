@@ -223,8 +223,17 @@ interface IPrettierOptions {/* https://prettier.io/docs/en/options.html */}
 type TreeObject = Object
 ```
 
-### Dependents
+## Dependents
 
 * EJS: [https://ejs.co](https://ejs.co/)
 * Prettier: [https://www.npmjs.com/package/prettier](https://www.npmjs.com/package/prettier)
 * fast-glob: [https://www.npmjs.com/package/fast-glob](https://www.npmjs.com/package/fast-glob)
+
+## Changelog
+* v2.0.2: normalize `onWatch` `path` (Unix => foo/bar; Windows => foo/bar)
+* v2.0.1: Optimized README
+* v2.0.0: 
+  * Support recursive watching.
+  * Support customize formatter.
+  * Optimized configuration Items.
+  * Optimized command options.

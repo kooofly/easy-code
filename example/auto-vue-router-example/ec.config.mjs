@@ -1,5 +1,4 @@
 import { snakeCase, camelCase, upperFirst, lowerFirst } from 'lodash-es'
-import path from 'path'
 const templatePath = 'template-router.js'
 const watchFiles = [templatePath, 'router.params.js']
 export default {

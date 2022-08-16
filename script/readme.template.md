@@ -26,7 +26,7 @@ npm install --save-dev @kooofly/easy-code
 
 You can provide a javascript that exports a single configuration object. default file name is `ec.config.mjs`.
 
-#### example
+### example
 JavaScript configuration file example `ec.config.mjs`
 
 ```
@@ -85,8 +85,17 @@ ecode YourCustomKey YourParams
 <%- dts %>
 ```
 
-### Dependents
+# Dependents
 
 * EJS: [https://ejs.co](https://ejs.co/)
 * Prettier: [https://www.npmjs.com/package/prettier](https://www.npmjs.com/package/prettier)
 * fast-glob: [https://www.npmjs.com/package/fast-glob](https://www.npmjs.com/package/fast-glob)
+
+# Changelog
+* v2.0.2: normalize `onWatch` `path` (Unix => foo/bar; Windows => foo/bar)
+* v2.0.1: Optimized README
+* v2.0.0: 
+  * Support recursive watching.
+  * Support customize formatter.
+  * Optimized configuration Items.
+  * Optimized command options.
