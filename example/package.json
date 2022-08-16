@@ -3,13 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "h": "ecode - -k hello",
-    "a": "ecode - -k auto-router",
-    "c": "ecode - -k command -p"
+    "h": "ecode hello",
+    "a": "ecode auto-router",
+    "w": "ecode watch",
+    "c": "ecode command "
   },
   "author": "kooofly",
   "license": "ISC",
   "dependencies": {
-    "ecode": "file:../"
+    "ecode": "file:../",
+    "lodash-es": "^4.17.21"
   }
 }

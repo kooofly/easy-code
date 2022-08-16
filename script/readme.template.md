@@ -26,60 +26,63 @@ npm install --save-dev @kooofly/easy-code
 
 You can provide a javascript that exports a single configuration object. default file name is `ec.config.mjs`.
 
-To run `easy-code` with a configuration file, use the -c command-line option
+#### example
+JavaScript configuration file example `ec.config.mjs`
+
+```
+<%- helloConfig %>
+```
+
+`template.html`
+
+```
+<%- helloTemplate %>
+```
+
+Then run the `easy-code` command:
+
+```
+ecode hello
+```
+
+output: output.html
+
+```
+<%- helloOutput %>
+```
+
+[More example](https://github.com/kooofly/easy-code/tree/main/example)
+
+## Command-line arguments to `easy-code`
+
+```
+Usage: ecode [options]
+
+Options:
+  -V, --version                 output the version number
+  -k, --key <config key>        config key
+  -p, --params <custom params>  custom params. "ecode hello abc" or "ecode hello foo=1^bar=2"
+  -c, --config <config file>    config file, default is ec.config.mjs
+  -d, --debug <debug>           output debug info
+  -h, --help                    display help for command
+```
 
 If you installed `easy-code` globally, run the `easy-code` command:
 
 ```
-ecode -c /path/to/conf.mjs -k YourCustomKey
+ecode -k YourCustomKey -p YourParams
 ```
 
-JavaScript configuration file example `ec.config.mjs`
-```
-<%- helloExample %>
-```
-
-you can configure you own `package.json` like this:
+or
 
 ```
-{
-  ...
-  "scripts": {
-    "hello": "ecode - -k hello"
-    "watchAndAutoCreateRoutes": "ecode - -k auto-router"
-    "useTemplateToCreateFileByFileName": "ecode - -k command -p"
-  }
-  ...
-}
+ecode YourCustomKey YourParams
 ```
-then you can run the command:
-```
-npm run watchAndAutoCreateRoutes
-npm run useTemplateToCreateFileByFileName YourFileName
-```
-[More example](https://github.com/kooofly/easy-code/tree/main/example)
-
-## Command-line arguments to `easy-code`
-| Options                          | Description                          |
-| :------------------------------- | :----------------------------------- |
-| -c `<value>`, --config `<value>` | config file, default `ec.config.mjs` |
-| -k `<value>`, --key `<value>`    | config key                           |
-| -p `<value>`, --params `<value>` | custom params                        |
-| -V, --version                    | output the version number            |
-| -h, --help                       | display help for command             |
-
 
 ## Configuration
 
-### Options
 ```
 <%- dts %>
-```
-### Example
-
-JavaScript configuration file example `ec.config.mjs`
-```
-<%- commandExample %>
 ```
 
 ### Dependents

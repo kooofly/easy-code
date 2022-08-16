@@ -1,21 +1,24 @@
 export default {
   readme: {
-    async beforeCreate (ctx) {
+    async beforeCreate (ctx, next) {
       const { helper: { getFileContent } } = ctx
-      const [helloExample, commandExample, dts] = await Promise.all([
-        getFileContent('example/hello-example/config.mjs'),
-        getFileContent('example/command-example/config.mjs'),
+      const [helloConfig, helloTemplate, helloOutput, dts] = await Promise.all([
+        getFileContent('example/hello-example/ec.config.mjs'),
+        getFileContent('example/hello-example/template.html'),
+        getFileContent('example/hello-example/output.html'),
         getFileContent('d.ts')
       ])
-      return {
-        templatePath: 'script/readme.template.md',
-        outputPath: './README.md',
+      next({
+        override: true,
+        template: '@/script/readme.template.md',
+        output: './README.md',
         params: {
-          helloExample,
-          commandExample,
+          helloConfig,
+          helloTemplate,
+          helloOutput,
           dts
         }
-      }
+      })
     }
   },
 }
