@@ -3,9 +3,7 @@
     "e": "ecode auto-router"
   },
   "dependencies": {
-    "decache": "^4.6.1",
     "ecode": "file:../../",
-    "import-fresh": "^3.3.0",
     "lodash-es": "^4.17.21"
   }
 }

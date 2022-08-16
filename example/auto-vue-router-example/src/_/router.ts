@@ -16,7 +16,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'project',
     children: [
       {
-        path: 'page/:pageId/:pid1',
+        path: 'page/:pageId/:pid',
         name: 'project_page',
         children: [
           {

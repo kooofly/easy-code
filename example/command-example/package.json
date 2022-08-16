@@ -1,3 +1,9 @@
 {
-  "name": "command-example"
+  "name": "command-example",
+  "scripts": {
+    "e": "ecode command "
+  },
+  "dependencies": {
+    "ecode": "file:../../"
+  }
 }

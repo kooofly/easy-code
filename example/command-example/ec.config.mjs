@@ -6,8 +6,8 @@ export default {
       const { params } = commandOptions
       const pkg = createRequire(import.meta.url)('./package.json')
       next([{
-        template: '@/command-example/template.html',
-        output: `@/command-example/${firstToUpperCase(params)}.html`,
+        template: '@/template.html',
+        output: `@/${firstToUpperCase(params)}.html`,
         params: {
           name: pkg.name,
           page: params,
