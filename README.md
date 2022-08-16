@@ -33,18 +33,19 @@ JavaScript configuration file example `ec.config.mjs`
 export default {
   hello: {
     async beforeCreate (ctx, next) {
-      next([{
+      const { name, commandOptions, helper, watchPaths } = ctx
+      next({
         override: true,
         template: '@/template.html',
         output: '@/output.html',
         params: {
           message: {
-            hello: 'hello',
+            hello: name,
             name: '<span>easy-code</span>',
             now: Date.now()
           }
         }
-      }])
+      })
     }
   }
 }
@@ -82,7 +83,7 @@ output: output.html
 </head>
 <body>
   
-    <h1>hello<span>easy-code</span> 1660637317567</h1>
+    <h1>hello<span>easy-code</span> 1660657538278</h1>
   
 </body>
 </html>
@@ -125,24 +126,21 @@ ecode YourCustomKey YourParams
 
     beforeCreate: (context: Context, next) => {
       next([{
-        format: 
+        format: (default: false)
           boolean or Customize formatter function (v: string) => string or IPrettierOptions object.
-            true: equivalent to executing the method prettier.format(fileData, { semi: false, parser: 'babel', singleQuote: true, trailingComma: 'none' })
-            IPrettierOptions: https://prettier.io/docs/en/options.html
-          default is false.
+          true: equivalent to executing the method prettier.format(fileData, { semi: false, parser: 'babel', singleQuote: true, trailingComma: 'none' })
+          IPrettierOptions: more details: https://prettier.io/docs/en/options.html
         
-        override: boolean. default is false. 
+        override: (default: false)
           If set to true will overwrite the file regardless of whether the file exists
 
         template: template path or template string. 
-          path example: '@/template.js'; 
-          string example: 'hello <%- foo %>'; more detail: https://ejs.co/#docs
+          path example: '@/template.js'.
+          string example: 'hello <%- foo %>'; more detail: https://ejs.co/#docs .
 
-        output: output path. 
-          example: '@/output.js' or 'output.js'
+        output: output path. example: '@/output.js' or 'output.js'.
 
-        params: object
-          example: { foo: 1, bar: 2 }
+        params: json object. example: { foo: 1, bar: 2 }.
 
       }])
     }
@@ -155,8 +153,8 @@ ecode YourCustomKey YourParams
     onWatch?: (
       {
         event: Available events: add, addDir, change, unlink, unlinkDir, ready, raw, error.
-        path: path.
-        stats: https://nodejs.org/api/fs.html#class-fsstats
+        path: path string.
+        stats: fs.Stats: https://nodejs.org/api/fs.html#class-fsstats
       },
       next
     ) => {
@@ -193,7 +191,8 @@ interface Context {
     firstToLowerCase: (str: string) => string
     getFileName: (name: string, operator?: string) => string
     getExtension: (name: string, operator?: string) => string
-    importModule: (filePath: string) => Promise<any>
+    importModule: (filePath: string) => Promise<any> // example: await importModule('foo.mjs')
+    importDeCache: (filePath: string) => any // example: importDeCache('foo.js')
     getFileContent: (filePath: string) => Promise<string>
     getFileList: (folderPath: string) =>  Promise<{ filePath: string, fileName: string, fileExtension: string }[]>
     getDirTree: (folderPath: string, onEachFile: (item: Item, path, stats) => void, onEachDirectory: (item: Item, path, stats) => void) =>  Promise<TreeObject>
