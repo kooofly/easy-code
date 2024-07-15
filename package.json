@@ -1,6 +1,6 @@
 {
   "name": "@kooofly/easy-code",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "easy-code is a tool for create files use template.",
   "main": "bin/ecode.mjs",
   "engines": {
@@ -17,6 +17,7 @@
   "repository": "kooofly/easy-code",
   "license": "ISC",
   "dependencies": {
+    "@ali/build-plugin-rax-seed": "^2.0.8",
     "chokidar": "^3.5.3",
     "colors": "^1.4.0",
     "commander": "^9.4.0",
